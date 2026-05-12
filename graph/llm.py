@@ -1,4 +1,5 @@
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
 
@@ -13,9 +14,8 @@ def get_llm():
             temperature=0.2,
         )
     else:
-        return ChatOpenAI(
+        return ChatGroq(
             model="llama-3.3-70b-versatile",
-            openai_api_key=os.getenv("GROQ_API_KEY"),
-            openai_api_base="https://api.groq.com/openai/v1",
+            api_key=os.getenv("GROQ_API_KEY"),
             temperature=0.2,
         )

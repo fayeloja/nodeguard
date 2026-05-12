@@ -1,4 +1,5 @@
 langgraph
+langchain-groq
 langchain-openai
 requests
 python-dotenv
