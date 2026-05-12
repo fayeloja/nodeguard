@@ -1,0 +1,47 @@
+name: NodeGuard AI Code Review
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  nodeguard-review:
+    runs-on: ubuntu-latest
+    name: Run NodeGuard Review
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run NodeGuard
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          python main.py https://github.com/${{ github.repository }}
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nodeguard-report
+          path: reports/**/_REPORT.html
+          retention-days: 30
+
+      - name: Fail pipeline on HIGH severity
+        run: |
+          if grep -r "Repository Severity: HIGH" reports/**/_SUMMARY.md; then
+            echo "❌ HIGH severity issues detected. Fix before merging."
+            exit 1
+          else
+            echo "✅ No HIGH severity issues. Good to go."
+          fi
