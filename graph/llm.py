@@ -1,4 +1,3 @@
-from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
@@ -6,16 +5,13 @@ import os
 load_dotenv()
 
 def get_llm():
-    openai_key = os.getenv("OPENAI_API_KEY")
+    groq_key = os.getenv("GROQ_API_KEY")
     
-    if openai_key:
-        return ChatOpenAI(
-            model="gpt-4o",
-            temperature=0.2,
-        )
+    if not groq_key:
+        raise ValueError("GROQ_API_KEY not found in environment variable")
     else:
         return ChatGroq(
             model="llama-3.3-70b-versatile",
-            api_key=os.getenv("GROQ_API_KEY"),
+            api_key=groq_key,
             temperature=0.2,
         )
