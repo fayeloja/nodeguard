@@ -1,16 +1,18 @@
 from graph.llm import get_llm
 from graph.state import ReviewState
+from utils.token_utils import truncate_code
 
 def code_fixer(state: ReviewState) -> ReviewState:
     llm = get_llm()
-    
+    code_snippet = truncate_code(state["code"])
+
     prompt = f"""You are a senior Node.js engineer.
 You have received a code review report flagging HIGH severity issues.
 Your job is to rewrite the code fixing ALL identified issues.
 
 ORIGINAL CODE:
 ```javascript
-{state['code']}
+{code_snippet}
 ```
 
 LOGIC ISSUES:

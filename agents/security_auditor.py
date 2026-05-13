@@ -1,10 +1,12 @@
 # pyrefly: ignore [missing-import]
 from graph.llm import get_llm
 from graph.state import ReviewState
+from utils.token_utils import truncate_code
 
 def security_auditor(state: ReviewState) -> ReviewState:
     llm = get_llm()
-    
+    code_snippet = truncate_code(state["code"])
+
     prompt = f"""You are a security engineer specializing in Node.js application security.
 
 Review the following JavaScript/Node.js code for security vulnerabilities only.
@@ -19,7 +21,7 @@ Check for:
 
 Code to review:
 ```javascript
-{state['code']}
+{code_snippet}
 ```
 
 Previous findings for context:

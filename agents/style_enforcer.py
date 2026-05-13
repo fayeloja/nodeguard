@@ -1,10 +1,12 @@
 # pyrefly: ignore [missing-import]
 from graph.llm import get_llm
 from graph.state import ReviewState
+from utils.token_utils import truncate_code
 
 def style_enforcer(state: ReviewState) -> ReviewState:
     llm = get_llm()
-    
+    code_snippet = truncate_code(state["code"])
+
     prompt = f"""You are a senior Node.js engineer focused on code quality and maintainability.
 
 Review the following JavaScript/Node.js code for style and quality issues only.
@@ -19,7 +21,7 @@ Check for:
 
 Code to review:
 ```javascript
-{state['code']}
+{code_snippet}
 ```
 
 Respond in this exact format:

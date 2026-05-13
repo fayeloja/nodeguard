@@ -1,9 +1,11 @@
 from graph.llm import get_llm
 from graph.state import ReviewState
+from utils.token_utils import truncate_code
 
 def logic_analyst(state: ReviewState) -> ReviewState:
     llm = get_llm()
-    
+    code_snippet = truncate_code(state["code"])
+
     prompt = f"""You are a senior Node.js engineer specializing in code correctness.
 
 Review the following JavaScript/Node.js code for logic issues only.
@@ -17,7 +19,7 @@ Check for:
 
 Code to review:
 ```javascript
-{state['code']}
+{code_snippet}
 ```
 
 Respond in this exact format:
