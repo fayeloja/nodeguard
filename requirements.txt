@@ -1,4 +1,6 @@
 langgraph
 langchain-groq>=0.0.1
+langchain-openai
+rich
 requests
 python-dotenv

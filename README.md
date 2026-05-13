@@ -1,6 +1,6 @@
 # NodeGuard
 
-NodeGuard is an AI-powered code review and analysis pipeline built with LangGraph. It leverages Groq's LLM (`llama-3.3-70b-versatile`) to automatically inspect, audit, and provide automated fixes for JavaScript codebases. NodeGuard operates through a pipeline of specialized agents that analyze logic, security, style, and compile comprehensive HTML and Markdown reports.
+NodeGuard is an AI-powered code review and analysis pipeline built with LangGraph. It leverages LLMs (like Groq's `llama-3.3-70b-versatile` or OpenAI's `gpt-4o-mini`) to automatically inspect, audit, and provide automated fixes for JavaScript codebases. NodeGuard operates through a pipeline of specialized agents that analyze logic, security, style, and compile comprehensive HTML and Markdown reports.
 
 ## Features
 
@@ -24,7 +24,7 @@ NodeGuard uses `langgraph` to create a directed graph of agents representing the
 ## Prerequisites
 
 - Python 3.11 or higher
-- A [Groq API Key](https://console.groq.com/keys)
+- A [Groq API Key](https://console.groq.com/keys) or [OpenAI API Key](https://platform.openai.com/api-keys)
 
 ## Installation
 
@@ -66,6 +66,21 @@ The outputs will be saved in the `reports/<repository-name>/` directory, contain
 - Fixed code files if applicable (`*_fixed.js`).
 - A repository-wide summary (`_SUMMARY.md`).
 - A comprehensive HTML dashboard (`_REPORT.html`).
+
+### CLI Options
+NodeGuard comes with a robust CLI. You can use the `--help` flag for more information:
+```bash
+python main.py --help
+```
+
+**Key Flags:**
+- `--provider <groq|openai>`: Select the LLM provider to use (default: groq).
+- `--model <model_name>`: Override the default model for the selected provider.
+- `--output <dir>`: Specify a custom directory for reports.
+- `--verbose`, `-v`: Enable detailed logging.
+
+**LLM Fallbacks:**
+If you select the OpenAI provider but no `OPENAI_API_KEY` is found, NodeGuard will automatically attempt to fall back to Groq.
 
 ## GitHub Actions Integration
 
