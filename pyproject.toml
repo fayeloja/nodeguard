@@ -1,0 +1,26 @@
+[project]
+name = "nodeguard"
+version = "0.1.0"
+description = "AI-powered multi-agent code review for JavaScript/Node.js"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Fayeloja" }]
+dependencies = [
+    "langgraph",
+    "langchain-groq>=0.0.1",
+    "langchain-openai",
+    "rich",
+    "requests",
+    "python-dotenv",
+]
+
+[project.scripts]
+nodeguard = "main:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["agents", "graph", "utils"]
+py-modules = ["main"]

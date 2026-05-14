@@ -28,18 +28,19 @@ NodeGuard uses `langgraph` to create a directed graph of agents representing the
 
 ## Installation
 
-1. **Clone the repository:**
+1. **Install via pip (recommended):**
    ```bash
-   git clone https://github.com/your-username/nodeguard.git
+   pip install nodeguard
+   ```
+
+   *Alternatively, install from source:*
+   ```bash
+   git clone https://github.com/fayeloja/nodeguard.git
    cd nodeguard
+   pip install -e .
    ```
 
-2. **Install the dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set up environment variables:**
+2. **Set up environment variables:**
    Create a `.env` file in the root directory and add your Groq API key:
    ```env
    GROQ_API_KEY=your_groq_api_key_here
@@ -52,14 +53,14 @@ NodeGuard supports two main operational modes: Local File Mode and GitHub Repo M
 ### Local File Mode
 To review a single JavaScript file on your local machine:
 ```bash
-python main.py path/to/your/file.js
+nodeguard path/to/your/file.js
 ```
 The output report and any generated fixes will be saved in the `reports/local/` directory.
 
 ### GitHub Repo Mode
 To review all JavaScript files in a public GitHub repository:
 ```bash
-python main.py https://github.com/username/repository
+nodeguard https://github.com/username/repository
 ```
 The outputs will be saved in the `reports/<repository-name>/` directory, containing:
 - Individual Markdown reports for each analyzed file (`*_review.md`).
@@ -70,7 +71,7 @@ The outputs will be saved in the `reports/<repository-name>/` directory, contain
 ### CLI Options
 NodeGuard comes with a robust CLI. You can use the `--help` flag for more information:
 ```bash
-python main.py --help
+nodeguard --help
 ```
 
 **Key Flags:**
