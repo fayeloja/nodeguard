@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "AI-powered multi-agent code review for JavaScript/Node.js"
 readme = "README.md"
 requires-python = ">=3.11"
-authors = [{ name = "Fayeloja" }]
+authors = [{ name = "Fatai Ayeloja Abiola - @Fayeloja" }]
 dependencies = [
     "langgraph",
     "langchain-groq>=0.0.1",
